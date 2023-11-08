@@ -1,0 +1,28 @@
+//tag type: Custom HTML
+//tag-cHTML-SendData2Zapier
+// This was a second proof of concept.
+//When the tag fires it will send a webhook request to Zapier URL defined below.
+// For security reasons I'm masking the identifying information with XXX
+//Before use update the zapier url
+// ALso in this example, it is sending fixed values
+// in production, we'll need to modify the code and send data dynamically
+// On the zapier end, it updates a Google Sheet
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $.ajax({
+    url: 'https://hooks.zapier.com/hooks/catch/XXXX/XXXXXX/',
+    type: 'POST',
+    data: {
+      value1: 'ajax',
+      value2: 'method',
+      value3: 'works'
+    },
+    success: function(response) {
+      // handle success
+    },
+    error: function(error) {
+      // handle error
+    }
+  });
+</script>
