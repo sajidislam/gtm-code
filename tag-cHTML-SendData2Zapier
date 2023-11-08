@@ -1,0 +1,44 @@
+//tag type: Custom HTML
+//tag-cHTML-SendData2Zapier
+// This was a proof of concept.
+//When the tag fires it will send a webhook request to Zapier URL defined below.
+// For security reasons I'm masking the identifying information with XXX
+//Before use update the zapier url
+// ALso in this example, it is sending fixed values
+// in production, we'll need to modify the code and send data dynamically
+// On the zapier end, it updates a Google Sheet
+
+<script>
+  // Create form dynamically
+  var form = document.createElement("form");
+  form.setAttribute("method", "post");
+  form.setAttribute("action", "https://hooks.zapier.com/hooks/catch/XXXXXX/XXXX/");
+
+  // Create form fields
+  var firstName = document.createElement("input");
+  firstName.setAttribute("type", "hidden");
+  firstName.setAttribute("name", "value1");
+  firstName.setAttribute("value", "John");
+
+  var email = document.createElement("input");
+  email.setAttribute("type", "hidden");
+  email.setAttribute("name", "value2");
+  email.setAttribute("value", "john@example.com");
+  
+ var email2 = document.createElement("input");
+  email2.setAttribute("type", "hidden");
+  email2.setAttribute("name", "value3");
+  email2.setAttribute("value", "john@example.com");
+
+
+  // Append fields to form
+  form.appendChild(firstName);
+  form.appendChild(email);
+  form.appendChild(email2);
+
+  // Append form to DOM
+  document.body.appendChild(form);
+
+  // Submit form
+  form.submit();
+</script>
