@@ -1,0 +1,32 @@
+//tag type: Custom HTML
+//tag-cHTML-setUTM_asCookies(staticList)
+//defined utm and gclid params
+
+<script>
+  // Function to create a cookie
+  function createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  // Function to get URL parameters
+  function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+  }
+
+  // List of parameters to check
+  var params = ['utm_campaign', 'utm_source', 'utm_medium', 'utm_content', 'utm_term', 'gclid'];
+
+  // Loop through each parameter and set it as a cookie if it exists
+  for (var i = 0; i < params.length; i++) {
+    var paramValue = getURLParameter(params[i]);
+    if (paramValue) {
+      createCookie(params[i], paramValue, 90);
+    }
+  }
+</script>
