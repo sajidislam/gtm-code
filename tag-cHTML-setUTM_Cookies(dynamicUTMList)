@@ -1,0 +1,45 @@
+//Tag Type: Custom HTML
+//tag-cHTML-setUTM_Cookies(dynamicUTMList)
+//parses the url for utm_* and splits and sets it as cookie
+
+<script>
+  // Function to create a cookie
+  function createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  // Function to get all URL parameters
+  function getAllUrlParams(url) {
+    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+    var obj = {};
+    if (queryString) {
+      queryString = queryString.split('#')[0];
+      var arr = queryString.split('&');
+      for (var i = 0; i < arr.length; i++) {
+        var a = arr[i].split('=');
+        var paramName = a[0];
+        var paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+        if (paramName.match(/^utm_/i) || paramName === 'gclid') {
+          obj[paramName] = paramValue;
+        }
+      }
+    }
+    return obj;
+  }
+
+  // Get all URL parameters
+  var params = getAllUrlParams();
+
+  // Loop through each parameter and set it as a cookie if it exists
+  for (var param in params) {
+    if (params.hasOwnProperty(param)) {
+      createCookie(param, params[param], 90);
+    }
+  }
+</script>
