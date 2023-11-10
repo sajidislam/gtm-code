@@ -1,0 +1,20 @@
+//If your gtm2gsheet is not firing, then use this tag to debug
+// By firing this tag, you will set a 1st party cookie call 
+//myCookie and this cookie will hold the value of the full url that is being called.
+<script>
+  // Construct the URL
+  var url = '{{CONST-gSheet-URL}}' +
+            '?secret_key=' + '{{CONST-secretKey}}' +
+            '&custom_referer=marketonlinegrow.com' +
+            '&Name=' + encodeURIComponent('{{var-1FPC-scLeadName}}') +
+            '&Email=' + encodeURIComponent('{{var-1FPC-scLeadEmail}}') +
+            '&gclid='+encodeURIComponent('{{var-1FPC-gclid}}');
+
+    alert("Value of url is: " + url);
+  
+  // Set the URL as a cookie
+  var d = new Date();
+  d.setTime(d.getTime() + (90*24*60*60*1000)); // 90 days
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = "myCookie=" + url + ";" + expires + ";path=/";    
+</script>
